@@ -54,7 +54,9 @@ ol li {
 }
 
 .list{
+  margin-top: 5px;
   display:flex;
+  border-bottom: 1px solid rgb(195, 195, 201);
 }
 
 .button_remove{
@@ -64,6 +66,8 @@ ol li {
   border:1px solid rgb(74, 74, 78);
   margin-left:10px;
   margin-bottom:5px;
+  border: none;
+  border-radius: 7px;
 }
 
 .button_remove:hover{
