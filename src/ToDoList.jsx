@@ -15,7 +15,7 @@ const ToDoLists = (props) => {
             <button key={props.index} className='button_remove' onClick={()=>{
                 itemValRemove(props.index);
             }}>X</button>
-            <li key={props.index}>{props.listVal}</li>
+            <li key={props.index + 'data'}>{props.listVal}</li>
         </div>
     )
 }
