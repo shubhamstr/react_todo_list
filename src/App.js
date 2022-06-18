@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ToDoLists from "./ToDoList";
 
 function App() {
@@ -11,9 +11,24 @@ function App() {
   }
 
   const itemValSet = () => {
-    setList((obj) => [...obj , val]);
+    let arr = list;
+    arr.push(val);
+    setList(arr);
+    localStorage.setItem("reactToDOListData", JSON.stringify(arr));
     setVal('');
   }
+
+  const loadStorageTodos = () => {
+    let data = JSON.parse(localStorage.getItem('reactToDOListData'));
+    if(data){
+      setList(data);
+    }
+  }
+
+  useEffect(() => {
+    loadStorageTodos();
+  }, [])
+  
   return (
     <>
       <div className="main_div">
