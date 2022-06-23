@@ -85,6 +85,27 @@ ol li {
   background:rgb(38, 116, 219);
 }
 
+.button_edit{
+  padding:10px;
+  background:rgb(197, 66, 66);
+  color:white;
+  border:1px solid rgb(74, 74, 78);
+  margin-left:10px;
+  margin-bottom:5px;
+  border: none;
+  border-radius: 7px;
+}
+
+.button_edit:hover{
+  color:lightyellow;
+  cursor:pointer;
+  background:rgb(165, 50, 50);
+}
+
+.imgEdit{
+  width: 15px;
+}
+
 /* scroll bar */
 .center_div ol::-webkit-scrollbar {
   width: 8px;
