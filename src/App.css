@@ -106,6 +106,47 @@ ol li {
   width: 15px;
 }
 
+/* modal */
+.headerModal {
+  display: flex;
+}
+.headerModal h2{
+  margin: 0;
+}
+.modalBtn {
+  padding:10px;
+  background:rgb(197, 66, 66);
+  color:white;
+  border:1px solid rgb(74, 74, 78);
+  margin-left:10px;
+  margin-bottom:5px;
+  border: none;
+  border-radius: 7px;
+  margin-left:auto;
+  cursor: pointer;
+}
+.modalBtnUpdate{
+  padding:10px;
+  background:rgb(38, 116, 219);
+  color:white;
+  border:1px solid rgb(74, 74, 78);
+  margin-left:10px;
+  margin-bottom:5px;
+  border: none;
+  border-radius: 7px;
+  margin-left:auto;
+  cursor: pointer;
+}
+.bodyModal{
+  margin-top: 20px;
+  padding: 20px 0px;
+}
+.bodyModal input {    
+  padding: 10px;
+  outline: none;
+  margin-top: 8px;
+}
+
 /* scroll bar */
 .center_div ol::-webkit-scrollbar {
   width: 8px;

@@ -1,8 +1,7 @@
-import './App.css';
+import "./App.css";
 import React, { useState, useEffect } from "react";
 import ToDoLists from "./ToDoList";
 import Modal from "react-modal";
-
 
 const customStyles = {
   content: {
@@ -14,9 +13,9 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 function App() {
-  const [val, setVal] = useState('');
+  const [val, setVal] = useState("");
   const [list, setList] = useState([]);
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -36,65 +35,82 @@ function App() {
 
   const itemVal = (event) => {
     setVal(event.target.value);
-  }
+  };
 
   const itemValSet = () => {
     let arr = list;
     arr.push(val);
     setList(arr);
     localStorage.setItem("reactToDOListData", JSON.stringify(arr));
-    setVal('');
-  }
+    setVal("");
+  };
 
   const loadStorageTodos = () => {
-    let data = JSON.parse(localStorage.getItem('reactToDOListData'));
-    if(data){
+    let data = JSON.parse(localStorage.getItem("reactToDOListData"));
+    if (data) {
       setList(data);
     }
-  }
+  };
 
   useEffect(() => {
     loadStorageTodos();
-  }, [])
-  
+  }, []);
+
   return (
     <>
       <div className="main_div">
         <div className="center_div">
-            <h1>To Do List</h1>
-            <br/>
-            <input type="text" placeholder="Add a items" onChange={itemVal} value={val}/>
-            <button className='button_set' onClick={itemValSet}>+</button>
-            <br/>
-            <br/>
+          <h1>To Do List</h1>
+          <br />
+          <input
+            type="text"
+            placeholder="Add a items"
+            onChange={itemVal}
+            value={val}
+          />
+          <button className="button_set" onClick={itemValSet}>
+            +
+          </button>
+          <br />
+          <br />
 
-            <ol>
-            {
-              list.map((listVal, index) => (
-                <ToDoLists key={index} listVal={listVal} index={index} setList={setList} list={list} openModal={openModal} />
-              ))
-            }
-            {(list.length === 0) ? <li>No Records</li> : null}
-            </ol>
+          <ol>
+            {list.map((listVal, index) => (
+              <ToDoLists
+                key={index}
+                listVal={listVal}
+                index={index}
+                setList={setList}
+                list={list}
+                openModal={openModal}
+              />
+            ))}
+            {list.length === 0 ? <li>No Records</li> : null}
+          </ol>
         </div>
         <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
-      </Modal>
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Update Task"
+        >
+          <div className="headerModal">
+            <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Update Task</h2>
+            <button className="modalBtn" onClick={closeModal}>
+              close
+            </button>
+          </div>
+          <div className="bodyModal">
+            <input
+              type="text"
+              placeholder="Update a item"
+              onChange={itemVal}
+              value={val}
+            />
+            <button className="modalBtnUpdate" onClick={closeModal}>Update</button>
+          </div>
+        </Modal>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import edit from "./assets/edit.png";
 
 const ToDoLists = (props) => {
