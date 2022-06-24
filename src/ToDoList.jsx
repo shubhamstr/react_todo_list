@@ -10,11 +10,14 @@ const ToDoLists = (props) => {
       }
     });
     props.setList(listNew);
+    localStorage.setItem("reactToDOListData", JSON.stringify(listNew));
   };
   const itemValEdit = (indexList) => {
     console.log("edit", indexList);
     console.log(props.list[indexList]);
     props.openModal();
+    props.setVal(props.list[indexList]);
+    props.setUpdateIndex(indexList);
   };
   return (
     <div className="list">

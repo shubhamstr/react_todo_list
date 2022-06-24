@@ -19,6 +19,7 @@ function App() {
   const [list, setList] = useState([]);
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [updateIndex, setUpdateIndex] = useState([]);
 
   function openModal() {
     setIsOpen(true);
@@ -26,6 +27,7 @@ function App() {
 
   function closeModal() {
     setIsOpen(false);
+    setVal("");
   }
 
   function afterOpenModal() {
@@ -35,6 +37,15 @@ function App() {
 
   const itemVal = (event) => {
     setVal(event.target.value);
+  };
+
+  const itemValUpdate = () => {
+    let arr = list;
+    arr[updateIndex] = val;
+    setList(arr);
+    localStorage.setItem("reactToDOListData", JSON.stringify(arr));
+    setVal("");
+    closeModal();
   };
 
   const itemValSet = () => {
@@ -83,6 +94,8 @@ function App() {
                 setList={setList}
                 list={list}
                 openModal={openModal}
+                setVal={setVal}
+                setUpdateIndex={setUpdateIndex}
               />
             ))}
             {list.length === 0 ? <li>No Records</li> : null}
@@ -108,7 +121,7 @@ function App() {
               onChange={itemVal}
               value={val}
             />
-            <button className="modalBtnUpdate" onClick={closeModal}>Update</button>
+            <button className="modalBtnUpdate" onClick={itemValUpdate}>Update</button>
           </div>
         </Modal>
       </div>
