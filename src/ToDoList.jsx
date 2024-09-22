@@ -52,21 +52,22 @@ const ToDoLists = (props) => {
               variant="contained"
               size="small"
               onClick={() => {
-                itemValRemove(props.index)
-              }}
-              sx={{ height: "35px", ml: 2 }}
-            >
-              <DeleteIcon />
-            </Button>
-            <Button
-              variant="contained"
-              size="small"
-              onClick={() => {
                 itemValEdit(props.index)
               }}
               sx={{ height: "35px", ml: 2 }}
             >
               <EditIcon />
+            </Button>
+            <Button
+              variant="contained"
+              size="small"
+              color="error"
+              onClick={() => {
+                itemValRemove(props.index)
+              }}
+              sx={{ height: "35px", ml: 2 }}
+            >
+              <DeleteIcon />
             </Button>
           </Box>
         </Box>

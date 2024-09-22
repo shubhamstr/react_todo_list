@@ -1,7 +1,6 @@
 import "./App.css"
 import React, { useState, useEffect } from "react"
 import ToDoLists from "./ToDoList"
-import Modal from "react-modal"
 import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
 import Typography from "@mui/material/Typography"
@@ -10,22 +9,15 @@ import Button from "@mui/material/Button"
 import AddIcon from "@mui/icons-material/Add"
 import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+// import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from "@mui/material/DialogTitle"
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-}
-Modal.setAppElement("#root")
 function App() {
   const [val, setVal] = useState("")
   const [list, setList] = useState([])
-  let subtitle
   const [modalIsOpen, setIsOpen] = React.useState(false)
   const [updateIndex, setUpdateIndex] = useState([])
 
@@ -36,11 +28,6 @@ function App() {
   function closeModal() {
     setIsOpen(false)
     setVal("")
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00"
   }
 
   const itemVal = (event) => {
@@ -136,31 +123,45 @@ function App() {
           </List>
         </Box>
       </Box>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Update Task"
+      <Dialog
+        open={modalIsOpen}
+        onClose={closeModal}
+        PaperProps={{
+          component: "form",
+          onSubmit: (event) => {
+            event.preventDefault()
+            const formData = new FormData(event.currentTarget)
+            const formJson = Object.fromEntries(formData.entries())
+            const email = formJson.email
+            console.log(email)
+            closeModal()
+          },
+        }}
       >
-        <div className="headerModal">
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Update Task</h2>
-          <button className="modalBtn" onClick={closeModal}>
-            close
-          </button>
-        </div>
-        <div className="bodyModal">
-          <input
+        <DialogTitle>Update Task</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            label="Task"
             type="text"
-            placeholder="Update a item"
+            fullWidth
+            variant="standard"
+            placeholder="Update a task"
             onChange={itemVal}
             value={val}
           />
-          <button className="modalBtnUpdate" onClick={itemValUpdate}>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" color="error" onClick={closeModal}>
+            Cancel
+          </Button>
+          <Button variant="contained" onClick={itemValUpdate}>
             Update
-          </button>
-        </div>
-      </Modal>
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   )
 }
