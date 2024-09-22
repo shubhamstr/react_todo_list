@@ -76,7 +76,7 @@ function App() {
   }, [])
 
   return (
-    <Container fixed>
+    <Container maxWidth="sm">
       <Box
         sx={{
           bgcolor: "#cfe8fc",
@@ -110,7 +110,7 @@ function App() {
             <AddIcon />
           </Button>
         </Box>
-        <Box>
+        <Box sx={{ mt: 4 }}>
           {list.map((listVal, index) => (
             <ToDoLists
               key={index}
